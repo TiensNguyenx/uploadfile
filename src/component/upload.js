@@ -1,66 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import classNames from 'classnames/bind';
 import styles from './upload.module.scss';
 import { Button } from 'react-bootstrap';
 import Returnfile from "../modals/return";
+import { FaUpload } from "react-icons/fa";
 import axios from 'axios';
+import { MdDeleteForever } from "react-icons/md";
 const cx = classNames.bind(styles);
 const FileUpload = () => {
-//   const [file, setFile] = useState(null);
-//   const [message, setMessage] = useState("");
-//    const [isShowModalReturn, setIsShowModalReturn] = useState(false);
-//   const handleFileChange = (event) => {
-//     setFile(event.target.files[0]);
-//   };
-// const handleClose = () => {
-//     setIsShowModalReturn(false);
-// }
-//   const handleUpload = async () => {
-//     // setIsShowModalReturn(true);
-//     if (!file) {
-//       setMessage("Vui lòng chọn một file!");
-//       return;
-//     }
-//     const formData = new FormData();
-//     formData.append("file", file);
 
-//   const response = await fetch("http://127.0.0.1:5000/upload", {
-//     method: "POST",
-//     body: formData,
-//   });
-
-//   const data = await response.json(); // Chuyển phản hồi thành JSON
-//   console.log("Response Data:", data); // In ra dữ liệu phản hồi
-
-//   if (response.ok) {
-//     setMessage("Tải lên thành công!");
-//   } else {
-//     setMessage(`Tải lên thất bại! Lỗi: ${data.message || "Không rõ lý do"}`);
-//   }
-//   };
-
-//   return (
-//     <div className={cx('container')}> 
-//  <div className={cx('content')}>
-//  <div className = {cx('header')}>
-//       Upload file
-//     </div>
-//     <div className={cx('rule')}>
-// <p>Maximum capacity per upload is 5GB.</p>
-//     </div>
-//       <input type="file" onChange={handleFileChange} />
-//       <Button variant="primary" onClick={handleUpload}>Upload</Button>
-//       {message && <p>{message}</p>}
-//  </div>
-// <Returnfile
-// show = {isShowModalReturn}
-// handleClose ={handleClose}
-// />
-//     </div>
-//   );
 const [file, setFile] = useState(null);
 const [error, setError] = useState('');
-
+const fileInputRef = useRef(null);
 const handleFileChange = (e) => {
   const selectedFile = e.target.files[0];
   if (selectedFile) {
@@ -110,16 +61,25 @@ return (
  <div className = {cx('header')}>
       Upload file
     </div>
+    <div style={{marginBottom:'40px',fontSize:'17px',fontWeight:'100'}}>Only PDF files are supported</div>
    <div className={cx('input')}>
    <input 
   type="file" 
   accept=".pdf" 
   onChange={handleFileChange} 
-  className="custom-file-input"
+  ref={fileInputRef}
 />
+<button className={cx('button')} onClick={() => {
+   setFile(null);
+   if (fileInputRef.current) {
+     fileInputRef.current.value = ""; // Reset input file
+   }
+}}>
+<MdDeleteForever fontSize='30px' color="red"/>
+</button>
    </div>
    
-     <Button variant="primary" onClick={handleSubmit}>Upload</Button>
+     <Button variant="primary" onClick={handleSubmit} size="lg" style={{padding:'5px 15px'}}><FaUpload style={{textAlign:'center', margin:'0 10px 6px 0'}}/>Upload</Button>
       {error && <p style={{color:'red',marginTop:'10px'}}>{error}</p>}
  </div>
 {/* <Returnfile

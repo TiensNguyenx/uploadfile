@@ -14,31 +14,24 @@
 .header {
     text-align: center;
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-weight: bold;
 }
 .input {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    :hover {
+        cursor: pointer;
+    }
 }
-.custom-file-input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 2px dashed #007bff;
-    border-radius: 8px;
-    text-align: center;
+
+input[type="file"] {
+  :hover {
     cursor: pointer;
-    color: #007bff;
-    font-weight: bold;
   }
-  
-  .custom-file-input:hover {
-    background-color: #e9ecef;
-  }
-  
-  .custom-file-input:focus {
-    outline: none;
-    border-color: #0056b3;
-  }
-  
+}
+
+.button {
+  margin-left: 10px;
+border: none; 
+background-color: transparent;
+}
