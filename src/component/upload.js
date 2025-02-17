@@ -39,18 +39,18 @@ const handleSubmit = async (e) => {
    },
    responseType: 'blob'
  })
-   .then((response) => {
-     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-     const a = document.createElement('a');
-     a.href = url;
-     a.download = 'file.pdf'; 
-     document.body.appendChild(a);
-     a.click();
-     document.body.removeChild(a);
-     window.URL.revokeObjectURL(url);
-   })
+ .then((response) => {
+  const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/zip' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'file.zip'; 
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+})
    .catch((error) => {
-     console.error('Error displaying PDF file', error);
+     console.error('Error displaying file', error);
    });
  
  
