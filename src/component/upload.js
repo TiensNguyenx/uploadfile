@@ -41,12 +41,16 @@ const handleSubmit = async (e) => {
  })
    .then((response) => {
      const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-     
-     // Mở file trong tab mới
-     window.open(url);
+     const a = document.createElement('a');
+     a.href = url;
+     a.download = 'file.pdf'; 
+     document.body.appendChild(a);
+     a.click();
+     document.body.removeChild(a);
+     window.URL.revokeObjectURL(url);
    })
    .catch((error) => {
-     console.error('Lỗi khi hiển thị file PDF:', error);
+     console.error('Error displaying PDF file', error);
    });
  
  
