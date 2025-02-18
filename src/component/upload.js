@@ -43,7 +43,7 @@ const handleSubmit = async (e) => {
   const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/zip' }));
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'file.zip'; 
+  a.download = `${file.name.replace(/\.pdf$/, '')}.zip`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
